@@ -8,7 +8,7 @@ tags:
   - pipelines
 authorGithubAlias: kevshakes
 authorName: Kevin Tuei
-date: 2023-06-27
+date: 2023-07-21
 ---
 In the current day and age, teamwork and collaboration is becoming increasingly important as technical teams become highly specialized. This is further evidenced by the unprecedented growth and embrace of agile teams, project management and program management. Dev(Sec)Ops has become the order of the day for development and operation teams to easily work together and break down silos.  
 However, building applications in an effective and efficient way requires native CI/CD tools that support these methodologies and are able to extend their functionality to specialized third-party tools that handle issue management. 
@@ -63,8 +63,46 @@ After providing your name, you will go through an email verification and passwor
 
 ### Step 2: Create and Configure a CodeCatalyst Space and Project from a Blueprint
 
-A Space is crucial in ....... while a Blueprint helps you .....
-After you have successfully logged in to Amazon Codetalyst, navigate to the `Space` here you will need to ensure that you have configured a billing account which is an AWS Account.
+* Quick Primer on Spaces, Projects and Blueprints
+
+Consider a CodeCatalyst Space as a logical grouping on CodeCatalyst that can be used to represent a Company if it is small. Several Spaces can represent departments or groups in a large organization.
+
+
+ `From experience mine my space initialized without a tier and had to contact AWS Support to assist me to resolve this. Same case happened to a fellow builder. So make sure you check your current tier after you link it with your AWS Account and verify your space on the AWS Management Console` 
+
+A CodeCatalyst Project as a collaborative effort in CodeCatalyst that supports development teams and tasks with shared continuous integration/continuous delivery (CI/CD) workflows and repositories.
+
+You can initialize projects using your own code from a CodeCommit, GitHub or Bitbucket Repository. The AWS team continuously develop and update CodeCatalyst Blueprints that synthesize projects and generate projects for you using the base configuration specified by the blueprint.
+
+ `For this particular tutorial you will use a CodeCatalyst Blueprint to create a React Web Application Project which you can customize further.` 
+
+Phew, that was quite a primer. Now that you understand what a Space, Project and a Blueprint is on CodeCatalyst let's proceed and create them. 
+
+After you have successfully logged in to Amazon Codetalyst from Step 1, CodeCatalyst will take you on an Onboarding journey consisting of the following:
+
+* Create your CodeCatalyst Alias which will be part of your profile on all of CodeCatalyst and used to mention you when collaborating on projects for example on a Kanban Board. 
+
+`Your CodeCatalyst alias needs to be unique, does not allow spaces and CANNOT be changed after creating them.`
+
+CodeCatalyst Onboarding - Create your Alias Page :
+![Create your CodeCatalyst Alias Page](images/CodeCatalyst_Onboarding1.png)
+
+* After creating your alias, you need to create the space where your projects will live in. 
+
+`Spaces can be used to store and manage projects and are free to use on AWS. However it is important to note that Spaces are initialized on the Free Tier`
+
+CodeCatalyst Onboarding - Create your Space Page :
+![Create your CodeCatalyst Space Page](images/CodeCatalyst_Onboarding2.png)
+
+
+* Once your Space is ready, you need to link an AWS Account to handle billing and deployments. 
+
+`You need to only enter an AWS Account ID you can access and has the appropriate permissions to access CodeCatalyst otherwise you will be unable to verify on the AWS Console.`
+
+In case you don't have an AWS Account you can create an [Free Tier AWS Account here:](https://aws.amazon.com/free/) 
+
+CodeCatalyst Onboarding - Link your AWS Account to CodeCatalyst Page :
+![Link your AWS Account with CodeCatalyst Page](images/CodeCatalyst_Onboarding3.png)
 
 ### Step 3: Set up and test your CodeCatalyst CI/CD Pipeline
 
@@ -99,4 +137,4 @@ If you want to learn more about Amazon CodeCatalyst, you can check out the follo
 * [Amazon CodeCatalyst Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/23fa5676-2943-415b-98b9-125f5e86912d/en-US)
 
 
-If you found this guide helpful, we appreciate your feedback and in case you end up facing any challenges along the way, we are here for you. Ping us.
+If you found this guide helpful, we appreciate your feedback and in case you end up facing any challenges, we are here for you, please send it our way
