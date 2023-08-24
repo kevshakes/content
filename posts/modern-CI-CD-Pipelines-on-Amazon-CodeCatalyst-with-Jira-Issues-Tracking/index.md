@@ -104,17 +104,129 @@ In case you don't have an AWS Account you can create an [Free Tier AWS Account h
 CodeCatalyst Onboarding - Link your AWS Account to CodeCatalyst Page :
 ![Link your AWS Account with CodeCatalyst Page](images/CodeCatalyst_Onboarding3.png)
 
+CodeCatalyst Onboarding - Verify the Amazon Codecatalyst space from your AWS Account :
+![Verify CodeCatalyst Space from your AWS Account](images/CodeCatalyst_Onboarding5.png)
+
+
 ### Step 3: Set up and test your CodeCatalyst CI/CD Pipeline
 
+* After a successful CodeCatalyst Onboarding, you need to establish the CI/CD pipeline on CodeCatalyst and test the Workflow to confirm that the Build, Test and Deploy steps complete successfully. 
+
+Navigate to the Amazon CodeCatalyst Create Project Page within the space if you have created several spaces,
+
+`Do remember that each space needs to be linked to the relevant AWS Account for the Deployment of the Project to be successfull.` 
+
+Once you have navigated to the Create Project page within CodeCatalyst, you are presented with three options to start your project.
+
+* Start with a blueprint - Leverage a template with sample code and ability to create project resources on your behalf 
+* Bring your own code - Link a code hosted in a Code Repository such as Github
+* Start from Scratch - An empty project with no resources is created for you to pupulate it with code and the project resources
+
+Amazon CodeCatalyst Create Project ![Create your project within a Space](images/CodeCatalyst_Project1.png)
+
+#### Option 1: Start with a blueprint
+When you select a Blueprint you can choose from a collection of blueprints developed by the CodeCatalyst Team, for simplicity you can select the Single-Page Application Blueprint for this guide
+
+Single-Page Application Blueprint ![Select the Single-Page Application Blueprint](images/CodeCatalyst_Project2.png)
+
+Enter the Project Name and scroll down to the Project Resources section where you select the AWS Account ID connected to the Space. You can also add a new AWS Account using the Add an AWS Account link.
+
+Single-Page Application Project Name and Project Resources ![Project Name and Project Resources](images/CodeCatalyst_Project3.png)
+
+It's also in this section where you specify the IAM role needed for CodeCatalyst to et the needed perimission to different AWS Services such as Cloudformation and Amplify to create the infrastructure and deploy the application. 
+
+You can click the View Role Requirements to view the Trust Policy and Inline Policy JSON for review and role creation within IAM. 
+
+Single-Page Application - IAM Role Requirements ![IAM Role Requirements](images/CodeCatalyst_Project5.png)
+
+
+Within the same page, expand the Additional configurations section and review the selections for th Web Application Framework, Hosting and CDK Programming Language. 
+
+For the purpose of this guide you can confirm that you will use the React Framework, Amplify Hosting and Typescript as the CDK Programming language. 
+
+You also have the option of selecting the AWS region where your application will be deployed as well as customize the Repository name and the name Cloudformation Stack that will be created to avail the resources needed to deploy the React Web Appliation.
+
+Single-Page Application - Additional Configurations ![Customize Additional Configurations](images/CodeCatalyst_Project3.png)
+
+You also have the option to review the YAML files used to set uo the CI/CD pipeline visually or as YAML code from the Right Side Panel as shown. 
+
+Single-Page Application - YAML ![Review the YAML files](images/CodeCatalyst_Project7.png)
+
+Click Create Project and in a few minutes you will be able to start customizing your project
+
+Single-Page Application Creation ![Project creation progress](images/CodeCatalyst_Project8.png)
+
+`You may encounter an error while creating your project regarding the Space not having a billing tier. This may happen even after associating your account. One workaround is to write to AWS Support who can resolve it from their end by adding the Space to the free tier.A response I have received previously is that there is a certain level of account usage required for you to be able to use both the Free Tier and the Standard Tier on CodeCatalyst. ` 
+
+Space Settings ![Navigate to the Space Settings](images/CodeCatalyst_Project_Error1.png)
+
+To associate an AWS Account to the Space as an AWS Billing Account:
+Navigate to Space Settings on the left Navigation Pane, Click Billing:
+
+Space Settings ![Navigate to the Space Settings](images/CodeCatalyst_Space_Settings.png)
+
+Under Billing details, you should see an active AWS account under a Free or Standard Tier. If the section is blank as shown then you need to change the billing tier by clicking on Change Billing Tier
+
+Billing Details ![Navigate to the Billing](images/CodeCatalyst_Space_Settings_Billing.png)
+
+When you Click on Change Billing Tier you will choose an AWS Account from the AWS Accounts already associated with your space. 
+
+Billing Details ![Navigate to the Billing](images/CodeCatalyst_Space_Settings_Billing_ChangeAccount.png)
+
+After choosing the AWS Account a successful update of the Billing Authorization will appear on your AWS Account. 
+
+Billing Authorization on your AWS Account ![Space Billing Authorization](images/CodeCatalyst_Space_Billing_Authorization.png)
+
+Once you have successfully associated an AWS Billing account you can repeat the Project creation steps and the Project will be succesfully created. 
+
+#### Option 2: Bring your own Code
+When you select to Bring your Own Code you are presented two dropdowns. In one dropdown you select the GitHub account, the account must have already been linked to the Space. In case you have nit linked any GitHub account to the Space, select the "Connect to a GitHub Account" link.
+
+Codecatalyst - Bring your own code ![Select Bring your own Code](images/CodeCatalyst_Project9.png)
+
+To connect a GitHub Account, navigate to Space Sessings, Installed Extentions and Coose Connect GitHub account. Once you complete that process ypu should be able to view your accoynt under the Connected GitHub accounts section.
+
+
+Codecatalyst - Connected GitHub Accounts ![Connected GtitHub Accounts](images/CodeCatalyst_Project10.png)
+
+In this guide, the public GitHub repository for a React-based Book Application is used. The Project Overview has two sections where you can view the repository on GitHub and an overview of Worklow runs for your CI/CD pipeline. 
+
+Since this is a new repository yor workflow runs will have no workflows. 
+
+Codecatalyst - Project Overview ![Project Overview](images/CodeCatalyst_Project11.png)
+
+Click Create Workflow and select the Source Repository and the Branch and choose Create. 
+
+Codecatalyst - Create Workflow ![Create Workflow](images/CodeCatalyst_Project12.png)
+
+For the Build stage you will be required to specift the environment. To create an environment you can navigate to the Environment and Create a Non-Production Environment. 
+
+Codecatalyst - Environment Details ![Environment Details](images/CodeCatalyst_Project16.png)
+
+On the workflow page you can configure the paremeters for the Build and Deploy stages including the Environment and the Runtime. In this guide you will leverage a Non-production environment and DeploytoAWSAmplifyHosting for the Build. Confirm that the workflow definition is valid by clicking Validate.
+
+Codecatalyst - Validate Workflow ![Validate Workflow](images/CodeCatalyst_Project14.png)
+
+Commit the Workflow and the initial Workflow Run will be automatically initiated deniting that the CI/CD Pipeline is now set up. 
+
+Codecatalyst - Workflow Run ![Workflow Run](images/CodeCatalyst_Project15.png)
+
+You can revise or stop the workflow at any time by selecting the Edit Workflow or Stop button. 
+Codecatalyst - Workflow Update ![Workflow Update](images/CodeCatalyst_Project18.png)
+
+
+## Connect Jira Issues
+
+CodeCatalyst offers native Issue management however you might want to extend the capabilities of Issue Management when working in team projects by leveraging Atlassian's Jira Issues. 
 
 ### Step 4: Connect your Jira sites to your CodeCatalyst space 
 
 The next step to connect your Jira Sites is to install Jira Software extension to your CodeCatalyst space.
 
 
-### Step 5: Link your Jira issue to a CodeCatalyst Pull Request
+### Link your Jira issue to a CodeCatalyst Pull Request
 
-Check this AWS Codumentation Article for more information on [working with pull requests in Amazon CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-pull-requests.html)
+You also have the ability to link your Jira Issue to a CodeCatalyst Pull Request. Although this is beyond the scope of this guide, check this AWS Documentation Article for more information on [working with pull requests in Amazon CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/source-pull-requests.html)
 
 ### Step 6: Link your Jira project to your CodeCatalyst project
 
@@ -123,6 +235,13 @@ Check this AWS Codumentation Article for more information on [working with pull 
 ## Clean Up the Resources
 
 Now that you’ve finished building a modern CI/CD pipeline on Amazon CodeCatalyst, you can delete all resources from Amazon CodeCatalyst and your AWS Account.
+
+To delete the resources:
+
+* Go to AWS Cloud formation and delete the stack associated with the project that was depoyed by CodeCatalyst
+* Delete your CodeCatalyst Project 
+* Unlink the repository from the Codecatalyst Space * Remove your AWS Account from the CoredeCatalyst Space
+
 
 
 ## Conclusion
